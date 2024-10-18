@@ -1,0 +1,28 @@
+.centered-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Horizontally center */
+  justify-content: center; /* Vertically center */
+  height: 100%; /* Takes full height of the dialog */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 300px; /* Optional: limit the form width */
+}
+
+.form-field {
+  width: 100%;
+  margin-bottom: 16px; /* Adds space between fields */
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin-top: 16px;
+}

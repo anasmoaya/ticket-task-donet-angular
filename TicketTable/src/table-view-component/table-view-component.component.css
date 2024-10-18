@@ -1,0 +1,42 @@
+
+
+/* Action Link Styles */
+.update-link {
+  color: #1e88e5; /* Blue color for Update link */
+  cursor: pointer;
+  margin: 5px
+}
+
+.delete-link {
+  color: #e53935; /* Red color for Delete link */
+  cursor: pointer;
+  margin: 10px;
+}
+
+.add-new-button {
+  background-color: #4caf50;
+  color: #ffffff;
+  margin-top: 15px;
+}
+
+.add-new-button:hover {
+  background-color: #388e3c;
+}
+
+.row-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 100%;
+}
+
+.filter-field {
+  flex: 1;
+  max-width: 300px;
+}
+

@@ -1,0 +1,40 @@
+<div class="centered-form-container">
+  <h2>{{ data.action }} Ticket</h2>
+  <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
+    <div class="form-container">
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Description</mat-label>
+        <input matInput formControlName="description" required>
+        <mat-error *ngIf="ticketForm.get('description')?.hasError('required')">
+          Description is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="date" required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="ticketForm.get('date')?.hasError('required')">
+          Date is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="status" required>
+          <mat-option value="Open">Open</mat-option>
+          <mat-option value="Closed">Closed</mat-option>
+        </mat-select>
+        <mat-error *ngIf="ticketForm.get('status')?.hasError('required')">
+          Status is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-actions">
+      <button mat-button mat-dialog-close>Cancel</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="ticketForm.invalid">Save</button>
+    </div>
+  </form>
+</div>

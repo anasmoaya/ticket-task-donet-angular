@@ -1,0 +1,79 @@
+<div class="filter-container   row-container">
+  <mat-form-field appearance="outline">
+    <mat-label>Filter by Description</mat-label>
+    <input matInput (keyup)="applyDescriptionFilter($event)" placeholder="Description">
+  </mat-form-field>
+
+
+  <mat-form-field appearance="outline">
+    <mat-label>Filter by Date Range</mat-label>
+    <mat-date-range-input [rangePicker]="dateRangePicker">
+      <input matStartDate [(ngModel)]="startDate" (ngModelChange)="applyDateRangeFilter()"
+             placeholder="Start date">
+      <input matEndDate [(ngModel)]="endDate" (ngModelChange)="applyDateRangeFilter()"
+             placeholder="End date">
+    </mat-date-range-input>
+    <mat-datepicker-toggle matSuffix [for]="dateRangePicker"></mat-datepicker-toggle>
+    <mat-date-range-picker #dateRangePicker></mat-date-range-picker>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Filter by Status</mat-label>
+    <mat-select [(ngModel)]="statusFilter" (selectionChange)="applyStatusFilter()">
+      <mat-option value="">All</mat-option>
+      <mat-option value="Open">Open</mat-option>
+      <mat-option value="Closed">Closed</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+
+
+<table mat-table [dataSource]="dataSource"  matSort class="mat-elevation-z8">
+
+  <!-- Ticket ID Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header style="color: #ffffff; font-weight: bold; background-color: #388e3c"> Ticket Id </th>
+    <td mat-cell style="border: 1px solid rgba(0, 0, 0, 0.12);box-sizing: border-box;" *matCellDef="let ticket"> {{ticket.id}} </td>
+  </ng-container>
+
+  <!-- Description Column -->
+  <ng-container matColumnDef="description">
+    <th mat-header-cell style="color: #ffffff; font-weight: bold; background-color: #388e3c" *matHeaderCellDef mat-sort-header> Description </th>
+    <td mat-cell style="border: 1px solid rgba(0, 0, 0, 0.12);box-sizing: border-box;" *matCellDef="let ticket"> {{ticket.description}} </td>
+  </ng-container>
+
+  <!-- Status Column -->
+  <ng-container matColumnDef="status">
+    <th mat-header-cell  *matHeaderCellDef mat-sort-header style="color: #ffffff; font-weight: bold; background-color: #388e3c"> Status </th>
+    <td mat-cell style="border: 1px solid rgba(0, 0, 0, 0.12);box-sizing: border-box;" *matCellDef="let ticket"> {{ticket.status}} </td>
+  </ng-container>
+
+  <!-- Date Column -->
+  <ng-container matColumnDef="date">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header style="color: #ffffff; font-weight: bold; background-color: #388e3c"> Date </th>
+    <td mat-cell style="border: 1px solid rgba(0, 0, 0, 0.12);box-sizing: border-box;" *matCellDef="let ticket"> {{ticket.date | date: 'MMM-dd-yyyy' }} </td>
+  </ng-container>
+
+  <!-- Actions Column -->
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef style="color: #ffffff; font-weight: bold; background-color: #388e3c"> Actions </th>
+    <td mat-cell style="border: 1px solid rgba(0, 0, 0, 0.12);box-sizing: border-box;" *matCellDef="let ticket">
+      <span class="update-link" (click)="onUpdate(ticket)">Update</span>
+      <span class="delete-link" (click)="onDelete(ticket)">Delete</span>
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="footer">
+    <td mat-footer-cell style="border: 1px solid rgba(0, 0, 0, 0.12);box-sizing: border-box;"  *matFooterCellDef [attr.colspan]="displayedColumns.length">
+      <button (click)="onAdd()" mat-raised-button style=" border-radius:0 ;background-color: #388e3c;color: #ffffff;margin-top: 5px;" color="primary">Add New</button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr style="height: 70px" mat-footer-row *matFooterRowDef="footerColumns"></tr>
+
+</table>
+<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+
